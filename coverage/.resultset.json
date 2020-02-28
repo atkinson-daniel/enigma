@@ -1,0 +1,19 @@
+{
+  "Unit Tests": {
+    "coverage": {
+      "/Users/danielatkinson/turing/1module/projects/enigma/lib/shift.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      }
+    },
+    "timestamp": 1582857321
+  }
+}
