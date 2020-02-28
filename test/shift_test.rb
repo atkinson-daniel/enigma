@@ -25,7 +25,7 @@ class ShiftTest < Minitest::Test
     shift = Shift.new
     shift.stubs(:key).returns("12345")
 
-    expected = [3, 5, 7, 9]
+    expected = [12, 23, 34, 45]
 
     assert_equal expected, shift.key_shift
   end
@@ -44,7 +44,7 @@ class ShiftTest < Minitest::Test
     shift = Shift.new
     shift.stubs(:key).returns("12345")
 
-    expected = [11, 9, 7, 9]
+    expected = [20, 27, 34, 45]
 
     assert_equal expected, shift.shifts
   end

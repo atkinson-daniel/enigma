@@ -7,11 +7,11 @@ class Shift
   end
 
   def key_shift
-    collection = []
+    key_shifts = []
     key.chars.each_cons(2) do |a|
-      collection << (a.sum(&:to_i))
+      key_shifts << (a.join.to_i)
     end
-    collection
+    key_shifts
   end
 
   def offset_shift
