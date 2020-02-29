@@ -7,8 +7,8 @@
           1,
           null,
           1,
-          5,
-          5,
+          2,
+          2,
           null,
           null,
           1,
@@ -26,15 +26,33 @@
           null,
           null,
           1,
-          1,
-          1,
-          5,
+          2,
+          2,
+          10,
           null,
+          null,
+          null
+        ]
+      },
+      "/Users/danielatkinson/turing/1module/projects/enigma/lib/enigma.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
           null,
           null
         ]
       }
     },
-    "timestamp": 1582904958
+    "timestamp": 1583000229
   }
 }
