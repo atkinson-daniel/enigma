@@ -21,6 +21,10 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma1.alphabet
   end
 
+  def test_it_can_create_offset_shifts
+    assert_equal [2, 4, 0, 0], @enigma1.offset_shift("010320")
+  end
+
   def test_it_can_create_key_shifts
     assert_equal [12, 23, 34, 45], @enigma1.key_shifts("12345")
   end
