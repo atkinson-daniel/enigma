@@ -19,16 +19,9 @@ class EnigmaTest < Minitest::Test
                 "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
                 " "]
     assert_equal expected, @enigma1.alphabet
-    assert_instance_of Shift, @enigma1.key_and_offset_shifts
-    assert_instance_of Array, @enigma1.final_shifts
   end
 
-  def test_it_can_encrypt
-    expected =  {
-                  encryption: "keder ohulw",
-                  key: "02715",
-                  date: "040895"
-                }
-    assert_equal expected, @enigma1.encrypt("hello world", "02715", "040895")
+  def test_it_can_create_key_shifts
+    assert_equal [12, 23, 34, 45], @enigma1.key_shifts("12345")
   end
 end
