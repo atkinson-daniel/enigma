@@ -21,6 +21,11 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, @enigma1.alphabet
   end
 
+  def test_it_can_encrypt
+    assert_equal "keder ohulw", @enigma1.encrypted("hello world", [3, 27, 73, 20])
+    assert_equal "keder, ohulw", @enigma1.encrypted("hello, world", [3, 27, 73, 20])
+  end
+
   def test_it_can_create_offset_shifts
     assert_equal [2, 4, 0, 0], @enigma1.offset_shift("010320")
   end
