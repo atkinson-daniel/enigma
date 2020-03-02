@@ -3,6 +3,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require "mocha/minitest"
 require "./lib/enigma"
+require "./lib/shift"
 
 class EnigmaTest < Minitest::Test
   def setup
@@ -31,6 +32,7 @@ class EnigmaTest < Minitest::Test
                   key: "02715",
                   date: "040895"
                 }
+
     assert_equal expected1, @enigma1.encrypt("hello world", "02715", "040895")
     assert_equal expected2, @enigma1.encrypt("hello, world", "02715", "040895")
   end
@@ -50,13 +52,37 @@ class EnigmaTest < Minitest::Test
                    date: "040895"
                 }
 
-  assert_equal expected1, @enigma1.decrypt("keder ohulw", "02715", "040895")
-  assert_equal expected2, @enigma1.decrypt("keder, ohulw", "02715", "040895")
+    assert_equal expected1, @enigma1.decrypt("keder ohulw", "02715", "040895")
+    assert_equal expected2, @enigma1.decrypt("keder, ohulw", "02715", "040895")
+  end
+
+  def test_it_can_decrypt_without_given_key_or_offset
+    expected1 =
+                {
+                   encryption: "lib sdmcvpu",
+                   key: "02715",
+                   date: "020320"
+                }
+    expected2 =
+                {
+                   encryption: "lib s,dmcvpu",
+                   key: "02715",
+                   date: "020320"
+                }
+    Date.stubs(:today).returns(Date.new(2020, 03, 02))
+
+    assert_equal expected1, @enigma1.encrypt("hello world", "02715")
+    assert_equal expected2, @enigma1.encrypt("hello, world", "02715")
   end
 
   def test_it_can_encrypt
     assert_equal "keder ohulw", @enigma1.encrypted("hello world", [3, 27, 73, 20])
     assert_equal "keder, ohulw", @enigma1.encrypted("hello, world", [3, 27, 73, 20])
+  end
+
+  def test_it_can_decrypt
+    assert_equal "hello world", @enigma1.decrypted("keder ohulw", [3, 27, 73, 20])
+    assert_equal "hello, world", @enigma1.decrypted("keder, ohulw", [3, 27, 73, 20])
   end
 
   def test_it_can_create_offset_shifts
