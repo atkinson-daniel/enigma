@@ -1,18 +1,17 @@
 class Shift
-  include Collectable
   attr_reader :key, :offset
 
   def initialize
-    @key = rand(0..99999).to_s.rjust(5, "0")
+    @key = (0..9).to_a.sample(5).join
     @offset = Date.today.strftime("%d%m%y")
   end
 
   def key_shift
-    collection = []
+    key_shifts = []
     key.chars.each_cons(2) do |a|
-      collection << ((a.map!(&:to_i)).sum)
+      key_shifts << (a.join.to_i)
     end
-    collection
+    key_shifts
   end
 
   def offset_shift

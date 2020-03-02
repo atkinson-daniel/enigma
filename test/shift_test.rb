@@ -11,21 +11,23 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    Date.stubs(:today).returns(Date.new(2020, 02, 12))
     shift = Shift.new
 
     assert_instance_of String, shift.key
     assert_equal 5, shift.key.length
     assert_instance_of String, shift.offset
     assert_equal 6, shift.offset.length
-    assert_equal "120220", shift.offset
+
+    Date.stubs(:today).returns(Date.new(2020, 02, 12))
+    shift2 = Shift.new
+    assert_equal "120220", shift2.offset
   end
 
   def test_it_can_create_a_key_shift
     shift = Shift.new
     shift.stubs(:key).returns("12345")
 
-    expected = [3, 5, 7, 9]
+    expected = [12, 23, 34, 45]
 
     assert_equal expected, shift.key_shift
   end
@@ -44,7 +46,7 @@ class ShiftTest < Minitest::Test
     shift = Shift.new
     shift.stubs(:key).returns("12345")
 
-    expected = [11, 9, 7, 9]
+    expected = [20, 27, 34, 45]
 
     assert_equal expected, shift.shifts
   end
