@@ -1,9 +1,11 @@
+require 'date'
+
 class Shift
   attr_reader :key, :offset
 
   def initialize
     @key = (0..9).to_a.sample(5).join
-    @offset = Date.today.strftime("%d%m%y")
+    @offset = Date::today.strftime("%d%m%y")
   end
 
   def key_shift

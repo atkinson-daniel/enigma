@@ -5,8 +5,14 @@ class Enigma
     @alphabet = ("a".."z").to_a << " "
   end
 
-  def encrypt(message, key = Shift.new.create_key, date = Shift.new.offset)
+  def encrypt(message, key = Shift.new.key, date = Shift.new.offset)
     {encryption: encrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
+    key: key,
+    date: date}
+  end
+
+  def decrypt(message, key = Shift.new.key, date = Shift.new.offset)
+    {encryption: decrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
     key: key,
     date: date}
   end
@@ -18,6 +24,25 @@ class Enigma
     until message_index == message.length
       if @alphabet.include?(message[message_index])
         to_rotate = @alphabet.index(message[message_index]) + shifts[shifts_index]
+        new_message << @alphabet.rotate(to_rotate).first
+        message_index += 1
+        shifts_index += 1
+        shifts_index = 0 if shifts_index == 4
+      else
+        new_message << message[message_index]
+        message_index += 1
+      end
+    end
+    new_message.join
+  end
+
+  def decrypted(message, shifts)
+    message_index = 0
+    shifts_index = 0
+    new_message = []
+    until message_index == message.length
+      if @alphabet.include?(message[message_index])
+        to_rotate = @alphabet.index(message[message_index]) - shifts[shifts_index]
         new_message << @alphabet.rotate(to_rotate).first
         message_index += 1
         shifts_index += 1
