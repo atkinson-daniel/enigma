@@ -2,7 +2,6 @@ require "./test/test_helper"
 require "minitest/autorun"
 require "minitest/pride"
 require "mocha/minitest"
-require "./lib/shift"
 require "./lib/enigma"
 
 class EnigmaTest < Minitest::Test
@@ -34,6 +33,25 @@ class EnigmaTest < Minitest::Test
                 }
     assert_equal expected1, @enigma1.encrypt("hello world", "02715", "040895")
     assert_equal expected2, @enigma1.encrypt("hello, world", "02715", "040895")
+  end
+
+  def test_it_can_decrypt
+    expected1 =
+                {
+                   decryption: "hello world",
+                   key: "02715",
+                   date: "040895"
+                }
+
+    expected2 =
+                {
+                   decryption: "hello, world",
+                   key: "02715",
+                   date: "040895"
+                }
+
+  assert_equal expected1, @enigma1.decrypt("keder ohulw", "02715", "040895")
+  assert_equal expected2, @enigma1.decrypt("keder, ohulw", "02715", "040895")
   end
 
   def test_it_can_encrypt

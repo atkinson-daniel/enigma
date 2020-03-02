@@ -11,6 +11,12 @@ class Enigma
     date: date}
   end
 
+  def decrypt(message, key = Shift.new.create_key, date = Shift.new.offset)
+    {encryption: decrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
+    key: key,
+    date: date}
+  end
+
   def encrypted(message, shifts)
     message_index = 0
     shifts_index = 0
