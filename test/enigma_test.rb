@@ -22,6 +22,21 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt
+    expected1 =  {
+                  encryption: "keder ohulw",
+                  key: "02715",
+                  date: "040895"
+                }
+    expected2 =  {
+                  encryption: "keder, ohulw",
+                  key: "02715",
+                  date: "040895"
+                }
+    assert_equal expected1, @enigma1.encrypt("hello world", "02715", "040895")
+    assert_equal expected2, @enigma1.encrypt("hello, world", "02715", "040895")
+  end
+
+  def test_it_can_encrypt
     assert_equal "keder ohulw", @enigma1.encrypted("hello world", [3, 27, 73, 20])
     assert_equal "keder, ohulw", @enigma1.encrypted("hello, world", [3, 27, 73, 20])
   end

@@ -5,6 +5,12 @@ class Enigma
     @alphabet = ("a".."z").to_a << " "
   end
 
+  def encrypt(message, key = Shift.new.create_key, date = Shift.new.offset)
+    {encryption: encrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
+    key: key,
+    date: date}
+  end
+
   def encrypted(message, shifts)
     message_index = 0
     shifts_index = 0
