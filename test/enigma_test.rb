@@ -28,4 +28,8 @@ class EnigmaTest < Minitest::Test
   def test_it_can_create_key_shifts
     assert_equal [12, 23, 34, 45], @enigma1.key_shifts("12345")
   end
+
+  def test_it_can_create_shifts
+   assert_equal [6, 6, 6, 6], @enigma1.create_shifts([1, 2, 3, 4], [5, 4, 3, 2])
+  end
 end

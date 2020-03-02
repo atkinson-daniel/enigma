@@ -5,6 +5,11 @@ class Enigma
     @alphabet = ("a".."z").to_a << " "
   end
 
+  def create_shifts(key_shifts, offset_shifts)
+    set_of_shifts = offset_shifts.zip(key_shifts)
+    set_of_shifts.map! {|set| set.sum }
+  end
+
   def offset_shift(date)
     squared = (date.to_i * date.to_i)
     last_four_digits = squared.to_s[-4..-1]
