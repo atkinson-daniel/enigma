@@ -1,3 +1,5 @@
+require_relative 'shift'
+
 class Enigma
   attr_reader :alphabet
 
@@ -6,13 +8,15 @@ class Enigma
   end
 
   def encrypt(message, key = Shift.new.key, date = Shift.new.offset)
-    {encryption: encrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
+    {encryption: encrypted(normalize_message(message),
+                 create_shifts(key_shifts(key), offset_shift(date))),
     key: key,
     date: date}
   end
 
   def decrypt(message, key = Shift.new.key, date = Shift.new.offset)
-    {encryption: decrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
+    {decryption: decrypted(normalize_message(message),
+                 create_shifts(key_shifts(key), offset_shift(date))),
     key: key,
     date: date}
   end
@@ -72,5 +76,9 @@ class Enigma
       key_shifts << (a.join.to_i)
     end
     key_shifts
+  end
+
+  def normalize_message(message)
+    message.downcase
   end
 end
