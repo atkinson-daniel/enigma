@@ -79,6 +79,8 @@ class EnigmaTest < Minitest::Test
   def test_it_can_return_encrypted_message
     assert_equal "keder ohulw", @enigma1.encrypted("hello world", [3, 27, 73, 20])
     assert_equal "keder, ohulw", @enigma2.encrypted("hello, world", [3, 27, 73, 20])
+    assert_equal "keder, ohulw", @enigma2.encrypted("HELLO, world", [3, 27, 73, 20])
+    assert_equal "!keder!, ohulw", @enigma2.encrypted("!heLLo!, world", [3, 27, 73, 20])
   end
 
   def test_it_can_return_decrypted_message
@@ -124,5 +126,10 @@ class EnigmaTest < Minitest::Test
     expected = [20, 27, 34, 45]
 
     assert_equal expected, shift.shifts
+  end
+
+  def test_it_can_normalize_message
+    assert_equal "hello world", @enigma.normalize_message('HELLO, world')
+    assert_equal "hello world", @enigma.normalize_message('!heLLo!, world')
   end
 end
