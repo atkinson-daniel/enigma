@@ -16,6 +16,4 @@ writer = File.open(ARGV[1], "w")
 writer.write(decrypted_message)
 writer.close
 
-require "pry"; binding.pry
-
 p "Created #{ARGV[1]} with the key #{key} and date #{date}"
