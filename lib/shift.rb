@@ -4,7 +4,7 @@ class Shift
   attr_reader :key, :offset
 
   def initialize
-    @key = (0..9).to_a.sample(5).join
+    @key = rand(0..99999).to_s.rjust(5, "0")
     @offset = Date::today.strftime("%d%m%y")
   end
 
