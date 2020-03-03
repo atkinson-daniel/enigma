@@ -3,11 +3,12 @@ require "minitest/autorun"
 require "minitest/pride"
 require "mocha/minitest"
 require "./lib/enigma"
-require "./lib/shift"
+
 
 class EnigmaTest < Minitest::Test
   def setup
     @enigma1 = Enigma.new
+    @enigma2 = Enigma.new
   end
 
   def test_it_exists
@@ -34,7 +35,7 @@ class EnigmaTest < Minitest::Test
                 }
 
     assert_equal expected1, @enigma1.encrypt("hello world", "02715", "040895")
-    assert_equal expected2, @enigma1.encrypt("hello, world", "02715", "040895")
+    assert_equal expected2, @enigma2.encrypt("hello, world", "02715", "040895")
   end
 
   def test_it_can_decrypt
@@ -53,7 +54,7 @@ class EnigmaTest < Minitest::Test
                 }
 
     assert_equal expected1, @enigma1.decrypt("keder ohulw", "02715", "040895")
-    assert_equal expected2, @enigma1.decrypt("keder, ohulw", "02715", "040895")
+    assert_equal expected2, @enigma2.decrypt("keder, ohulw", "02715", "040895")
   end
 
   def test_it_can_decrypt_without_given_key_or_offset
@@ -77,12 +78,12 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_encrypt
     assert_equal "keder ohulw", @enigma1.encrypted("hello world", [3, 27, 73, 20])
-    assert_equal "keder, ohulw", @enigma1.encrypted("hello, world", [3, 27, 73, 20])
+    assert_equal "keder, ohulw", @enigma2.encrypted("hello, world", [3, 27, 73, 20])
   end
 
   def test_it_can_decrypt
     assert_equal "hello world", @enigma1.decrypted("keder ohulw", [3, 27, 73, 20])
-    assert_equal "hello, world", @enigma1.decrypted("keder, ohulw", [3, 27, 73, 20])
+    assert_equal "hello, world", @enigma2.decrypted("keder, ohulw", [3, 27, 73, 20])
   end
 
   def test_it_can_create_offset_shifts
