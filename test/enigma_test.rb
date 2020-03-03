@@ -100,20 +100,29 @@ class EnigmaTest < Minitest::Test
 
   def test_shifts_can_create_key_shifts
     shift = Shift.new
-    shift.key_shift
+    shift.stubs(:key).returns("12345")
 
-    assert_equal 5, shift.key.length
+    expected = [12, 23, 34, 45]
+
+    assert_equal expected, shift.key_shift
   end
 
   def test_shifts_can_create_offset_shifts
+    Date.stubs(:today).returns(Date.new(2020, 02, 12))
     shift = Shift.new
 
-    assert_equal 4, shift.offset_shift.length
+    expected = [8, 4, 0, 0]
+
+    assert_equal expected, shift.offset_shift
   end
 
   def test_shifts_can_create_shifts
+    Date.stubs(:today).returns(Date.new(2020, 02, 12))
     shift = Shift.new
+    shift.stubs(:key).returns("12345")
 
-    assert_equal 4, shift.shifts.length
+    expected = [20, 27, 34, 45]
+
+    assert_equal expected, shift.shifts
   end
 end
