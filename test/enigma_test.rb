@@ -76,12 +76,12 @@ class EnigmaTest < Minitest::Test
     assert_equal expected2, @enigma1.encrypt("hello, world", "02715")
   end
 
-  def test_it_can_encrypt
+  def test_it_can_return_encrypted_message
     assert_equal "keder ohulw", @enigma1.encrypted("hello world", [3, 27, 73, 20])
     assert_equal "keder, ohulw", @enigma2.encrypted("hello, world", [3, 27, 73, 20])
   end
 
-  def test_it_can_decrypt
+  def test_it_can_return_decrypted_message
     assert_equal "hello world", @enigma1.decrypted("keder ohulw", [3, 27, 73, 20])
     assert_equal "hello, world", @enigma2.decrypted("keder, ohulw", [3, 27, 73, 20])
   end
@@ -96,5 +96,24 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_create_shifts
    assert_equal [6, 6, 6, 6], @enigma1.create_shifts([1, 2, 3, 4], [5, 4, 3, 2])
+  end
+
+  def test_shifts_can_create_key_shifts
+    shift = Shift.new
+    shift.key_shift
+
+    assert_equal 5, shift.key.length
+  end
+
+  def test_shifts_can_create_offset_shifts
+    shift = Shift.new
+
+    assert_equal 4, shift.offset_shift.length
+  end
+
+  def test_shifts_can_create_shifts
+    shift = Shift.new
+
+    assert_equal 4, shift.shifts.length
   end
 end
