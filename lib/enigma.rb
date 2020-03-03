@@ -1,3 +1,5 @@
+require_relative 'shift'
+
 class Enigma
   attr_reader :alphabet
 
@@ -12,7 +14,7 @@ class Enigma
   end
 
   def decrypt(message, key = Shift.new.key, date = Shift.new.offset)
-    {encryption: decrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
+    {decryption: decrypted(message, create_shifts(key_shifts(key), offset_shift(date))),
     key: key,
     date: date}
   end
