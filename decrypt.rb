@@ -10,7 +10,7 @@ key = ARGV[2]
 date = ARGV[3]
 
 decrypted_text = enigma1.decrypt(message, key, date)
-decrypted_message = decrypted_text[:encryption]
+decrypted_message = decrypted_text[:decryption]
 
 writer = File.open(ARGV[1], "w")
 writer.write(decrypted_message)
